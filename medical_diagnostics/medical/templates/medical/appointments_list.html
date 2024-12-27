@@ -1,0 +1,60 @@
+{% extends 'medical/base.html' %}
+        {% block content %}
+
+          <h2>{{ name_list }}</h2>
+          <div class="row">
+            <div class="album py-5 bg-light">
+              <div class="container">
+          
+                <div class="row">
+                  {% for object in object_list %}
+                  <div class="col-md-4">
+                    <div class="card mb-4 box-shadow img-fluid" style="height: 300px;">
+                      <div class="card-header">
+                          <h5>№ {{ object.id }}</h5>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                              <a href="{% url 'medical:appointment_update' object.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Изменить</a>
+                              <a href="{% url 'medical:appointment_delete' object.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Удалить</a>
+                            </div>
+                          </div>
+                      </div>
+                      
+                      <div class="card-body" style="width: 300px;">
+                          <p class="card-text"><strong>Врач:</strong> {{ object.specialist }}</p>
+                          <p class="card-text"><strong>Дата/Время:</strong><br> {{ object.procedure_data|date:"d.m.Y"}}</p>
+                      </div>
+                      <div class="card-footer">
+                        <p class="card-text"><strong>Стоимость:</strong><br> {{ object.service.price }}</p>
+                      </div>
+                  </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h2>Статистика</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Количество записей</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>{{ object_list.count }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div >
+              <a href="{% url 'medical:appointment_create' %}" class="btn btn-primary btn-lg">Новая запись</a>
+            </div>
+          </div>
+          {% endblock %}
+
+

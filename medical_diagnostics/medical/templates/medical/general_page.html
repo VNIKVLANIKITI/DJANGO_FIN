@@ -1,0 +1,94 @@
+{% extends 'medical/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Добро пожаловать в наш медицинский диагностический центр!</h1>
+    <p class="lead text-center">Ваше здоровье — наш приоритет.</p>
+
+    <p>Мы предлагаем <strong>современные диагностические услуги</strong> с использованием новейшего оборудования и технологий. Наша команда высококвалифицированных специалистов гарантирует точные результаты и индивидуальный подход к каждому пациенту.</p>
+
+    <p>Мы понимаем, что здоровье — это важнейший аспект жизни, и стремимся сделать диагностику доступной и комфортной.</p>
+
+  <h2>Перечень предоставляемых услуг</h2>
+
+  <section id="system-logic" class="mb-3" >
+    <div class="bd-example" style="width: 800px; justify-content: center;">
+      <!-- Слайдер -->
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <!-- Индикаторы -->
+        <ol class="carousel-indicators">
+          {% for service in services %}
+          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
+          {% endfor %}
+        </ol>
+        <!-- Слайды -->
+        <div class="carousel-inner">
+          {% for service in services %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <!-- Встроенная SVG -->
+            <img class="bd-placeholder-img d-block w-100" fill="#000001" height="500px" width="300px" src="{% static  svg_list|random %}">
+
+          </img>
+            <svg class="bd-placeholder-img d-block w-100" width="400" height="150" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
+              <rect width="100%" height="100%" fill="#00BFFF"></rect>
+              
+
+            </svg>
+            
+            <!-- Подпись слайда -->
+            <div class="carousel-caption d-md-block" >
+              <h5>{{ service.name }}</h5>
+              <p>Продолжительность: {{ service.duration }} мин</p>
+              <p>Стоимость: {{ service.price }} руб.</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- Кнопки переключения -->
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Форма обратной связи -->
+  <div class="col-md-8 order-md-1">
+    <h2 class="mt-4">Запишитесь на консультацию</h2>
+    <p>и получите профессиональную помощь, которая поможет вам сохранить здоровье на долгие годы.</p>
+    <form id="contactForm">
+      <div class="form-group">
+        <label for="name">Имя</label>
+        <input type="text" class="form-control" id="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Сообщение</label>
+        <textarea class="form-control" id="message" rows="3" required></textarea>
+      </div>
+      <div class="text-center">
+        <a href="#" type="submit" class="btn btn-primary btn-lg">Записаться на прием</a>
+    </div>
+    </form>
+  </div>
+</div>
+
+  <!-- Подвал -->
+  <footer class="text-center mt-5">
+      <!-- Контактная информация -->
+  <h2>Контактная информация</h2>
+  <p>Email: info@company.com</p>
+  <p>Телефон: +7 (123) 456-78-90</p>
+    <p>&copy; 2024 Портал медицинской диагностики. Все права защищены.</p>
+  </footer>
+</div>
+{% endblock %}
